@@ -11,6 +11,7 @@
   "dependencies": {
     "e-book": "file:",
     "next": "14.2.13",
+    "pg": "^8.13.0",
     "react": "^18",
     "react-dom": "^18"
   },
