@@ -1,5 +1,6 @@
 {
   "name": "e-book",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
+    "autoprefixer": "^10.4.20",
     "e-book": "file:",
     "next": "14.2.13",
     "pg": "^8.13.0",

@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import React, { useState } from 'react';
 
 const AddPost = () => {
@@ -10,66 +9,64 @@ const AddPost = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         // Handle form submission logic here
-        try{
-            fetch('/api/add-post', {
-                method: 'POST', 
+        try {
+            await fetch('/api/add-post', {
+                method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ title, content, published })})
-                
-            }
-            catch(error){
-                console.error(error)
-            }
-    setContent('')
-    setTitle('')
-    setPublished(false)
+                body: JSON.stringify({ title, content, published }),
+            });
+        } catch (error) {
+            console.error(error);
+        }
+        setContent('');
+        setTitle('');
+        setPublished(false);
     };
 
     return (
-        <div className="m-10">
-            <Link href={'/'}>View Feeds</Link>
-            <h1 className="text-2xl font-bold mb-5">Add Post</h1>
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">Add a New Post</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label htmlFor="title" className="block mb-1">Title:</label>
+                    <label className="block text-sm font-medium text-gray-700">Title</label>
                     <input
+                        placeholder='add'
                         type="text"
-                        id="title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className=" px-3 py-2 border rounded-md"
-                        required
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                 </div>
                 <div>
-                    <label htmlFor="content" className="block mb-1">Content:</label>
+                    <label className="block text-sm font-medium text-gray-700">Content</label>
                     <textarea
-                        id="content"
+                        placeholder='add'
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className=" px-3 py-2 border rounded-md"
-                        rows={4}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                 </div>
-                <div>
-                    <label className="flex items-center">
-                        <input
-                            type="checkbox"
-                            checked={published}
-                            onChange={(e) => setPublished(e.target.checked)}
-                            className="mr-2"
-                        />
-                        Published
-                    </label>
+                <div className="flex items-center">
+                    <input
+                                  placeholder='add'
+                                  type="checkbox"
+                        checked={published}
+                        onChange={(e) => setPublished(e.target.checked)}
+                        className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                    />
+                    <label className="ml-2 block text-sm text-gray-900">Published</label>
                 </div>
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                <button
+                    type="submit"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                     Add Post
                 </button>
             </form>
         </div>
     );
-}
+};
 
 export default AddPost;

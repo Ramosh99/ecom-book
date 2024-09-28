@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Post from "../../components/post";
 import prisma from "../../lib/prisma";
+
 async function getposts(){
   const posts = await prisma.post.findMany({
     where: {
