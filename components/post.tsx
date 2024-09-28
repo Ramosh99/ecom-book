@@ -1,6 +1,12 @@
 import React from 'react';
+interface PostProps {
+  id: string;
+  title: string;
+  content: string;
+  authorName: string;
+}
 
-const Post = ({id, title, content, authorName}:any) => {
+const Post: React.FC<PostProps> = ({id, title, content, authorName}) => {
     return (
         <div>
         <h1>{id}</h1>

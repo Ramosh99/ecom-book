@@ -16,9 +16,19 @@ async function getposts(){
   return posts;
 }
 
+interface Post {
+  id: string;
+  title: string;
+  content: string | null;
+  published: boolean;
+  authorId: string | null;
+  author: {
+    name: string | null;
+  } | null;
+}
+
 export default async function Home() {
   const posts = await getposts();
-  // console.log(posts);
   return (
     <main className="m-10">
       <h1 className="text-center text-4xl text-blue-500">
@@ -29,17 +39,15 @@ export default async function Home() {
         add
       </button>
       <h1 className="text-center">feed</h1>
-      {
-        posts.map((post:any) => (
-          <Post
+      {posts.map((post: Post) => (
+        <Post
           key={post.id}
           id={post.id}
           title={post.title}
-          content={post.content}
-          authorName={post.author.name}
-          ></Post>
-        ))
-      }
+          content={post.content || ''}
+          authorName={post.author?.name || 'Unknown'}
+        />
+      ))}
     </main>
   );
 }
